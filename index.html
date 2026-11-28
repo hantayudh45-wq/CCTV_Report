@@ -12,6 +12,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" as="image" href="logo-copy-computer.PNG" fetchpriority="high">
 <link rel="preload" as="image" href="./assets/backgrounds/app-background.webp?v=134" fetchpriority="high" media="(min-width: 681px)">
 <link rel="preload" as="image" href="./assets/backgrounds/app-background-mobile.png?v=134" fetchpriority="high" media="(max-width: 680px)">
 <style>
@@ -446,7 +447,7 @@ body>main{position:relative!important;z-index:1!important}
 <body class="login-view">
 <main>
 <section class="welcome-brand" aria-label="Logo dan informasi waktu">
-  <div class="welcome-logo"><img src="logo-copy-computer.PNG" alt="Logo Copy Computer"></div>
+  <div class="welcome-logo"><img src="logo-copy-computer.PNG" alt="Logo Copy Computer" fetchpriority="high" decoding="async"></div>
 <div class="welcome-info">
   <div class="date-time-row">
     <div class="date-chip"><span class="mini-icon">◷</span><div><small>WAKTU</small><strong id="welcomeTime">--:--:--</strong></div></div>
