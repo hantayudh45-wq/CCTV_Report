@@ -443,6 +443,30 @@ body>main{position:relative!important;z-index:1!important}
 <style id="copy-computer-mobile-background">
 @media(max-width:680px){body::before{background:linear-gradient(115deg,rgba(2,24,79,.58),rgba(4,75,157,.36) 52%,rgba(0,30,94,.58)),url("./assets/backgrounds/app-background-mobile.png?v=134") center center/cover no-repeat!important}}
 </style>
+<style id="app-menu-logo-exact-welcome-match">
+/* Samakan logo menu setelah login persis dengan perlakuan logo di welcome page. */
+.app-menu-view .welcome-brand .welcome-logo{
+  width:88px!important;height:48px!important;max-width:42vw!important;
+  margin:0 auto 32px!important;padding:0!important;overflow:visible!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;position:relative!important;isolation:isolate!important;
+}
+.app-menu-view .welcome-brand .welcome-logo::before{
+  top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;
+  width:166%!important;aspect-ratio:1!important;border-radius:50%!important;
+  background:radial-gradient(circle,rgba(235,248,255,.68) 0%,rgba(215,240,255,.38) 34%,rgba(170,220,255,.14) 66%,rgba(120,195,255,.045) 84%,rgba(120,195,255,0) 100%)!important;
+  box-shadow:none!important;filter:blur(12px)!important;
+}
+.app-menu-view .welcome-brand .welcome-logo img{
+  display:block!important;position:relative!important;z-index:1!important;
+  width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  filter:drop-shadow(0 0 4px rgba(225,246,255,.42))!important;
+}
+@media(max-width:680px){
+  .app-menu-view .welcome-brand .welcome-logo{width:80px!important;height:44px!important;margin-bottom:28px!important}
+}
+</style>
 </head>
 <body class="login-view">
 <main>
