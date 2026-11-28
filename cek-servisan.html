@@ -195,11 +195,17 @@ body{color:#fff!important}
 }
 
 
-/* Posisi header logo dan kartu mengikuti jarak standar welcome page. */
-.status-main{margin:10px auto 30px!important}
-.status-brand{margin:8px auto 16px!important}
+/* Posisi vertikal disamakan dengan welcome page: ruang atas main + jarak brand. */
+.status-main{
+ margin:10px auto 30px!important;
+ padding-top:clamp(10px,2vh,20px)!important;
+}
+.status-brand{margin:12px auto 20px!important}
 @media(max-width:680px){
- .status-main{margin:10px auto 30px!important}
+ .status-main{
+  margin:10px auto 30px!important;
+  padding-top:clamp(10px,2vh,20px)!important;
+ }
  .status-brand{margin:8px auto 16px!important}
 }
 </style></head><body>
