@@ -415,6 +415,33 @@ body>main{position:relative!important;z-index:1!important}
 /* Add breathing room between the logo and the date/time tiles */
 .login-view .welcome-brand .welcome-logo{margin-bottom:32px!important}
 @media(max-width:680px){.login-view .welcome-brand .welcome-logo{margin-bottom:28px!important}}
+
+<style id="app-menu-logo-match-welcome">
+/* Samakan efek logo di menu utama dengan logo pada halaman welcome/login. */
+.app-menu-view .welcome-brand .welcome-logo::before{
+  content:""!important;
+  position:absolute!important;
+  top:50%!important;
+  left:50%!important;
+  transform:translate(-50%,-50%)!important;
+  width:166%!important;
+  aspect-ratio:1!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle,rgba(235,248,255,.68) 0%,rgba(215,240,255,.38) 34%,rgba(170,220,255,.14) 66%,rgba(120,195,255,.045) 84%,rgba(120,195,255,0) 100%)!important;
+  box-shadow:none!important;
+  filter:blur(12px)!important;
+  z-index:0!important;
+}
+.app-menu-view .welcome-brand .welcome-logo img{
+  position:relative!important;
+  z-index:1!important;
+  filter:drop-shadow(0 0 4px rgba(225,246,255,.42))!important;
+}
+.app-menu-view .welcome-brand .welcome-logo{margin-bottom:32px!important}
+@media(max-width:680px){
+  .app-menu-view .welcome-brand .welcome-logo{width:80px!important;height:44px!important;margin-bottom:28px!important}
+}
+</style>
 </style>
 </head>
 <body class="login-view">
