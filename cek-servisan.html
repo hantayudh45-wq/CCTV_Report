@@ -54,9 +54,49 @@ header{
   body::before{background-position:center center!important;background-size:cover!important}
 }
 
+
+/* Desain kartu pengecekan mengikuti kartu login utama; fungsi form tetap sama. */
+body{color:#fff!important}
+.status-main{max-width:520px!important;margin:clamp(28px,6vh,64px) auto!important;padding:0 16px!important}
+.status-card{
+ position:relative!important;overflow:hidden!important;
+ padding:28px 30px 26px!important;border:1px solid rgba(132,210,255,.45)!important;
+ border-radius:25px!important;
+ background:rgba(3,28,82,.86)!important;
+ box-shadow:0 18px 48px rgba(0,12,48,.38)!important;
+ backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+ color:#fff!important
+}
+.status-brand{text-align:center;position:relative;isolation:isolate;margin:0 auto 8px}
+.status-logo{position:relative;width:190px;height:106px;margin:0 auto 8px;display:grid;place-items:center;isolation:isolate}
+.status-logo:before{content:"";position:absolute;inset:-28%;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(235,248,255,.68) 0%,rgba(215,240,255,.38) 34%,rgba(170,220,255,.14) 66%,rgba(120,195,255,.045) 84%,rgba(120,195,255,0) 100%);filter:blur(12px)}
+.status-logo img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 4px rgba(225,246,255,.42))}
+.status-brand-name{font-size:18px;font-weight:850;letter-spacing:.12em;color:#fff}
+.status-brand-subtitle{font-size:12px;color:#b8d9ff}
+.status-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(132,210,255,.5),transparent);margin:18px 0 20px}
+.status-card h1{font-size:27px!important;text-align:center;color:#fff!important}
+.status-card .muted{color:#b8d9ff!important}
+.status-card label{color:#d5eaff!important}
+.status-card input,.status-card textarea{border:1px solid rgba(174,216,255,.95)!important;border-radius:14px!important;background:#fff!important;color:#12366f!important;box-shadow:0 0 0 3px rgba(36,155,255,.10)!important}
+.status-card input::placeholder{color:#8294ad!important}
+.status-card button{background:linear-gradient(105deg,#087cf5,#0648c5 60%,#07318f)!important;box-shadow:0 8px 20px rgba(0,94,255,.28)!important}
+.status-card .msg{color:#ffb9c2!important}
+.status-card .result{border-color:rgba(174,216,255,.35)!important}
+.status-card .grid b{color:#b8d9ff!important}
+.status-card .grid span{color:#fff!important}
+.status-card .status{background:rgba(17,119,239,.25)!important;color:#8eeaff!important}
+.status-main>a,.status-main>p{color:#b8d9ff!important}
+@media(max-width:600px){
+ .status-main{margin:22px auto!important;padding:0 12px!important}
+ .status-card{padding:22px 18px!important;border-radius:22px!important}
+ .status-logo{width:165px;height:92px}
+ .status-card h1{font-size:24px!important}
+}
 </style></head><body>
-<header><img src="logo-copy-computer.PNG" alt="Logo Copy Computer"><div><b>COPY COMPUTER</b><small>Layanan pengecekan status servis online</small></div></header>
-<main><section class="card"><h1>Cek Status Servisan</h1><p class="muted">Masukkan nomor tiket dan PIN yang diberikan saat perangkat diterima.</p>
+<main class="status-main"><section class="card status-card">
+<div class="status-brand"><div class="status-logo"><img src="logo-copy-computer.PNG" alt="Logo Copy Computer"></div><div class="status-brand-name">COPY COMPUTER</div><div class="status-brand-subtitle">Layanan pengecekan status servis online</div></div>
+<div class="status-divider"></div>
+<h1>Cek Status Servisan</h1><p class="muted">Masukkan nomor tiket dan PIN yang diberikan saat perangkat diterima.</p>
 <form id="lookup"><label for="ticket">Nomor antrian servis</label><input id="ticket" required placeholder="Contoh: SRV-0001" autocomplete="off">
 <label for="pin">PIN pengecekan</label><input id="pin" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6 digit PIN" autocomplete="off">
 <button id="submit" type="submit">Cek Status</button></form><p id="message" class="msg" role="alert"></p>
