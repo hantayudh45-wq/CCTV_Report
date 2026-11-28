@@ -1,7 +1,7 @@
 /* Service worker: membuat aplikasi bisa dibuka tanpa sinyal.
    Naikkan angka versi di bawah setiap kali index.html diubah, supaya HP mengambil versi baru. */
-var CACHE = 'laporan-cctv-v132';
-var SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'logo-copy-computer.PNG', 'copycomputer-tech-bg.jpg', 'cctv.html', 'servisan/index.html', 'servisan/app.html', 'servisan/manifest.webmanifest', 'nota.html', 'operasional.html', 'jadwal.html', 'absensi.html', 'cek-servisan.html'];
+var CACHE = 'laporan-cctv-v133';
+var SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'logo-copy-computer.PNG', 'copycomputer-tech-bg.jpg', 'assets/backgrounds/app-background.webp', 'cctv.html', 'servisan/index.html', 'servisan/app.html', 'servisan/manifest.webmanifest', 'nota.html', 'operasional.html', 'jadwal.html', 'absensi.html', 'cek-servisan.html'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(
