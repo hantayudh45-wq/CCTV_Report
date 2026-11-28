@@ -703,7 +703,22 @@ function resetForm(){editing=null;editingVersion=null;$('jobForm').reset();$('fo
 $('jobForm').addEventListener('submit',async e=>{e.preventDefault();const d={nama:$('nama').value,wa:$('wa').value,jenis:$('jenis').value,customType:$('customType').value,model:$('model').value,serial:$('serial').value,lain:$('lain').value,keluhan:$('keluhan').value,pemeriksaan:$('pemeriksaan').value,teknisi:$('teknisi').value,catatan:$('catatan').value};try{if(editing!==null){const current=jobs.find(j=>j.id===editing);if(!current)throw new Error('Data servis tidak ditemukan. Muat ulang History.');await persistRecord('service',{...current,...d,_cloudUpdatedAt:editingVersion},false)}else{await persistRecord('service',{pin:generateCustomerPin(),date:new Date().toLocaleString('id-ID',{day:'2-digit',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}),createdAt:new Date().toISOString(),status:'Menunggu pemeriksaan',...d},true)}resetForm();alert('Data servisan berhasil disimpan dan disinkronkan online.')}catch(err){alert('Data servis belum tersimpan: '+err.message)}});
 function isServiceEditLocked(j){return /(^|\b)(selesai|sudah diambil|siap diambil)(\b|$)/i.test(String(j?.status||''))}
 function edit(id){let j=jobs.find(x=>String(x.id)===String(id));if(!j){alert('Data servis tidak ditemukan. Muat ulang History lalu coba Edit kembali.');return}if(isServiceEditLocked(j)){alert('Servisan yang sudah selesai atau diambil tidak dapat diedit.');return}showServiceView();editing=j.id;editingVersion=j._cloudUpdatedAt;['nama','wa','jenis','customType','model','serial','lain','keluhan','pemeriksaan','catatan','teknisi'].forEach(k=>$(k).value=j[k]||'');updateDeviceFields();$('formTitle').textContent='Edit '+j.ticket;$('saveBtn').textContent='Simpan Perubahan';window.scrollTo({top:0,behavior:'smooth'})}
-async function status(id){let j=jobs.find(x=>String(x.id)===String(id));if(!j)return;let opts=serviceStatuses;let v=prompt('Ubah status:\n'+opts.map((s,i)=>(i+1)+'. '+s).join('\n'),String(opts.indexOf(j.status)+1));if(v&&opts[+v-1]){try{$('filter').value='';await persistRecord('service',{...j,status:opts[+v-1]},false)}catch(err){alert('Status tidak tersimpan: '+err.message)}}}
+async function status(id){
+ let j=jobs.find(x=>String(x.id)===String(id));if(!j)return;
+ let opts=serviceStatuses;
+ let v=prompt('Ubah status:\n'+opts.map((s,i)=>(i+1)+'. '+s).join('\n'),String(opts.indexOf(j.status)+1));
+ if(v&&opts[+v-1]){
+  const nextStatus=opts[+v-1];
+  if(nextStatus===j.status)return;
+  try{
+   $('filter').value='';
+   const history=Array.isArray(j.statusHistory)?j.statusHistory.slice():[];
+   if(!history.length)history.push({status:j.status||'Menunggu pemeriksaan',at:j.createdAt||null});
+   history.push({status:nextStatus,at:new Date().toISOString()});
+   await persistRecord('service',{...j,status:nextStatus,statusHistory:history},false);
+  }catch(err){alert('Status tidak tersimpan: '+err.message)}
+ }
+}
 function receipt(j){
  const w=window.open('','_blank');if(!w){alert('Izinkan pop-up untuk mencetak nota.');return}
  const device=(j.jenis==='Lainnya'?(j.customType||'Lainnya'):j.jenis)+' '+(j.model||'');
