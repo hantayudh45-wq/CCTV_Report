@@ -713,7 +713,7 @@ async function status(id){
   try{
    $('filter').value='';
    const history=Array.isArray(j.statusHistory)?j.statusHistory.slice():[];
-   if(!history.length)history.push({status:j.status||'Menunggu pemeriksaan',at:j.createdAt||null});
+   if(!history.length)history.push({status:j.status||'Menunggu pemeriksaan',at:j.status===serviceStatuses[0]?(j.createdAt||null):null});
    history.push({status:nextStatus,at:new Date().toISOString()});
    await persistRecord('service',{...j,status:nextStatus,statusHistory:history},false);
   }catch(err){alert('Status tidak tersimpan: '+err.message)}
