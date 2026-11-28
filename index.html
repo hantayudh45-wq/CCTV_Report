@@ -12,6 +12,8 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" as="image" href="./assets/backgrounds/app-background.webp?v=134" fetchpriority="high" media="(min-width: 681px)">
+<link rel="preload" as="image" href="./assets/backgrounds/app-background-mobile.png?v=134" fetchpriority="high" media="(max-width: 680px)">
 <style>
 :root{color-scheme:light;--navy:#10265a;--blue:#1768e8;--cyan:#06b8d2;--muted:#71809a;--line:#dfe8f7;--soft:#f4f8ff}
 *{box-sizing:border-box}
@@ -175,7 +177,7 @@ main{width:100%;max-width:100%;padding-left:max(14px,env(safe-area-inset-left));
 <style id="copy-computer-premium-welcome-theme">
 html{background:#eaf4ff}
 body{background:transparent!important;position:relative;isolation:isolate}
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url("./assets/backgrounds/app-background.webp?v=133");background-position:center;background-size:cover;background-repeat:no-repeat;opacity:1;transition:opacity .25s ease}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:url("./assets/backgrounds/app-background.webp?v=134");background-position:center;background-size:cover;background-repeat:no-repeat;opacity:1;transition:opacity .25s ease}
 body.app-menu-view::before{opacity:.22}
 main{margin:0 auto!important;padding-top:clamp(14px,3vh,34px);padding-bottom:max(22px,env(safe-area-inset-bottom))}
 .welcome-brand{width:min(440px,100%);margin:0 auto 16px;padding:0 10px}
@@ -241,7 +243,7 @@ main{margin:0 auto!important;padding-top:clamp(14px,3vh,34px);padding-bottom:max
 <style id="copy-computer-approved-design-fix">
 html{background:#eaf4ff!important}
 body{background:transparent!important;position:relative;isolation:isolate}
-body::before{z-index:0!important;opacity:1!important;background-image:url("./assets/backgrounds/app-background.webp?v=133")!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+body::before{z-index:0!important;opacity:1!important;background-image:url("./assets/backgrounds/app-background.webp?v=134")!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
 body>main{position:relative;z-index:1}
 body.app-menu-view::before{opacity:.22!important}
 .login-view main{padding-top:clamp(12px,2vh,24px)!important;padding-bottom:24px!important}
@@ -265,7 +267,7 @@ body.app-menu-view::before{opacity:.22!important}
 <style id="copy-computer-background-logo-final-fix">
 html,body{min-height:100%;background:#eaf4ff!important}
 body{position:relative!important;isolation:isolate!important;background:transparent!important}
-body::before{content:""!important;position:fixed!important;inset:0!important;z-index:-1!important;pointer-events:none!important;background:linear-gradient(115deg,rgba(2,24,79,.58),rgba(4,75,157,.36) 52%,rgba(0,30,94,.58)),url("./assets/backgrounds/app-background.webp?v=133") center center/cover no-repeat!important;opacity:1!important}
+body::before{content:""!important;position:fixed!important;inset:0!important;z-index:-1!important;pointer-events:none!important;background:linear-gradient(115deg,rgba(2,24,79,.58),rgba(4,75,157,.36) 52%,rgba(0,30,94,.58)),url("./assets/backgrounds/app-background.webp?v=134") center center/cover no-repeat!important;opacity:1!important}
 body.app-menu-view::before{opacity:.18!important}
 .login-view main{padding-top:12px!important;padding-bottom:20px!important}
 .login-view .welcome-brand{width:min(440px,100%)!important;margin:0 auto 12px!important;padding:0 8px!important}
@@ -285,7 +287,7 @@ body.app-menu-view::before{opacity:.18!important}
 /* Tema login biru teknologi; elemen login tetap HTML asli dan tetap berfungsi. */
 html{background:transparent!important}
 body{position:relative!important;isolation:isolate!important;background:transparent!important}
-body::before{background-image:linear-gradient(115deg,rgba(2,24,79,.58),rgba(4,75,157,.36) 52%,rgba(0,30,94,.58)),url("./assets/backgrounds/app-background.webp?v=133")!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;opacity:1!important}
+body::before{background-image:linear-gradient(115deg,rgba(2,24,79,.58),rgba(4,75,157,.36) 52%,rgba(0,30,94,.58)),url("./assets/backgrounds/app-background.webp?v=134")!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;opacity:1!important}
 body.app-menu-view::before{opacity:.16!important}
 .login-view main{padding-top:clamp(18px,3vh,34px)!important;padding-bottom:24px!important}
 .login-view .welcome-brand{width:min(420px,100%)!important;margin:0 auto 22px!important;padding:0 10px!important}
@@ -354,7 +356,7 @@ body.app-menu-view::before{opacity:.16!important}
 /* Perbaikan prioritas: samakan intensitas wallpaper menu dengan welcome page. */
 body.app-menu-view::before{opacity:1!important}
 /* Wallpaper menu: tampilkan gambar teknologi tanpa lapisan gelap welcome/login. */
-body.app-menu-view::before{background-image:url("./assets/backgrounds/app-background.webp?v=133")!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important;opacity:1!important}
+body.app-menu-view::before{background-image:url("./assets/backgrounds/app-background.webp?v=134")!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important;opacity:1!important}
 
 .app-menu-view::before{opacity:1!important}
 .app-menu-view .welcome-brand{width:min(420px,100%)!important;margin:0 auto 22px!important;padding:0 10px!important}
@@ -392,7 +394,7 @@ body::before{
   z-index:0!important;
   display:block!important;
   pointer-events:none!important;
-  background-image:url("./assets/backgrounds/app-background.webp?v=133")!important;
+  background-image:url("./assets/backgrounds/app-background.webp?v=134")!important;
   background-position:center center!important;
   background-size:cover!important;
   background-repeat:no-repeat!important;
@@ -436,6 +438,9 @@ body>main{position:relative!important;z-index:1!important}
   .app-menu-view .welcome-brand .welcome-logo{width:80px!important;height:44px!important;margin-bottom:28px!important}
 }
 </style>
+</style>
+<style id="copy-computer-mobile-background">
+@media(max-width:680px){body::before{background:linear-gradient(115deg,rgba(2,24,79,.58),rgba(4,75,157,.36) 52%,rgba(0,30,94,.58)),url("./assets/backgrounds/app-background-mobile.png?v=134") center center/cover no-repeat!important}}
 </style>
 </head>
 <body class="login-view">
