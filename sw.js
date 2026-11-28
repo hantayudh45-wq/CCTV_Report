@@ -25,6 +25,16 @@ self.addEventListener('fetch', function (e) {
   if (!ok) return;
   e.respondWith(
     caches.open(CACHE).then(function (cache) {
+      var isLogo = /\/logo-copy-computer\.PNG$/i.test(url.pathname);
+      if (isLogo) {
+        return cache.match(req, { ignoreSearch: true }).then(function (hit) {
+          if (hit) return hit;
+          return fetch(req, { cache: 'no-store' }).then(function (res) {
+            if (res && res.ok) cache.put(req, res.clone());
+            return res;
+          });
+        });
+      }
       var isWallpaper = /\/assets\/backgrounds\/app-background(?:-mobile)?\.(?:webp|png)$/.test(url.pathname);
       if (isWallpaper) {
         return cache.match(req, { ignoreSearch: true }).then(function (hit) {
