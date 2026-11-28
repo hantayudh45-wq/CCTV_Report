@@ -1,7 +1,7 @@
 /* Service worker: membuat aplikasi bisa dibuka tanpa sinyal.
    Naikkan angka versi di bawah setiap kali index.html diubah, supaya HP mengambil versi baru. */
-var CACHE = 'laporan-cctv-v133';
-var SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'logo-copy-computer.PNG', 'copycomputer-tech-bg.jpg', 'assets/backgrounds/app-background.webp', 'cctv.html', 'servisan/index.html', 'servisan/app.html', 'servisan/manifest.webmanifest', 'nota.html', 'operasional.html', 'jadwal.html', 'absensi.html', 'cek-servisan.html'];
+var CACHE = 'laporan-cctv-v134';
+var SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'logo-copy-computer.PNG', 'copycomputer-tech-bg.jpg', 'assets/backgrounds/app-background.webp', 'assets/backgrounds/app-background-mobile.png', 'cctv.html', 'servisan/index.html', 'servisan/app.html', 'servisan/manifest.webmanifest', 'nota.html', 'operasional.html', 'jadwal.html', 'absensi.html', 'cek-servisan.html'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(
@@ -25,7 +25,22 @@ self.addEventListener('fetch', function (e) {
   if (!ok) return;
   e.respondWith(
     caches.open(CACHE).then(function (cache) {
-      // Always check the network first so GitHub Pages updates are not hidden by an old cached app.
+      var isWallpaper = /\/assets\/backgrounds\/app-background(?:-mobile)?\.(?:webp|png)$/.test(url.pathname);
+      if (isWallpaper) {
+        return cache.match(req, { ignoreSearch: true }).then(function (hit) {
+          if (hit) {
+            fetch(req, { cache: 'no-store' }).then(function (res) {
+              if (res && res.ok) cache.put(req, res.clone());
+            }).catch(function () {});
+            return hit;
+          }
+          return fetch(req, { cache: 'no-store' }).then(function (res) {
+            if (res && res.ok) cache.put(req, res.clone());
+            return res;
+          });
+        });
+      }
+      // Other app files keep the existing network-first update behavior.
       return fetch(req, { cache: 'no-store' }).then(function (res) {
         if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone());
         return res;
