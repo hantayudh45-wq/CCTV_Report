@@ -231,6 +231,33 @@ body{color:#fff!important}
 }
 .status-main>p>a:visited{color:#fff!important}
 .status-main>p>a:hover{background:rgba(8,65,150,.96)!important}
+
+/* Timeline pelacakan servis: ringkas, satu panel, tanpa kartu bertumpuk. */
+.status-timeline{
+ margin:14px 0 18px!important;padding:13px 14px 10px!important;
+ border:1px solid rgba(174,216,255,.42)!important;border-radius:15px!important;
+ background:rgba(7,49,119,.48)!important;color:#fff!important;
+}
+.status-timeline:empty{display:none!important}
+.status-timeline-title{display:flex!important;align-items:center!important;gap:8px!important;margin:0 0 10px!important;color:#fff!important;font-size:13px!important;font-weight:800!important}
+.status-timeline-list{display:flex!important;flex-direction:column!important;gap:0!important}
+.status-timeline-item{display:grid!important;grid-template-columns:30px minmax(0,1fr) auto!important;align-items:start!important;column-gap:9px!important;position:relative!important;min-height:47px!important;padding:0 0 10px!important}
+.status-timeline-item:last-child{padding-bottom:0!important;min-height:30px!important}
+.status-timeline-marker{width:27px!important;height:27px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:rgba(143,190,255,.2)!important;border:1px solid rgba(174,216,255,.55)!important;font-size:14px!important;z-index:1!important}
+.status-timeline-item:not(:last-child):before{content:""!important;position:absolute!important;left:13px!important;top:27px!important;bottom:0!important;width:1px!important;background:rgba(174,216,255,.45)!important}
+.status-timeline-copy{min-width:0!important;padding-top:3px!important}
+.status-timeline-name{font-size:12px!important;line-height:1.35!important;font-weight:750!important;color:#eaf5ff!important;overflow-wrap:anywhere!important}
+.status-timeline-note{font-size:10px!important;line-height:1.35!important;color:#b8d9ff!important;margin-top:2px!important}
+.status-timeline-time{font-size:10px!important;line-height:1.35!important;color:#c8e5ff!important;text-align:right!important;white-space:nowrap!important;padding-top:4px!important}
+.status-timeline-item.is-current .status-timeline-marker{background:#087cf5!important;border-color:#8eeaff!important;box-shadow:0 0 0 3px rgba(8,124,245,.16)!important}
+.status-timeline-item.is-current .status-timeline-name{color:#fff!important}
+@media(max-width:600px){
+ .status-timeline{padding:12px 11px 9px!important;margin:12px 0 16px!important}
+ .status-timeline-item{grid-template-columns:27px minmax(0,1fr)!important;column-gap:8px!important;min-height:48px!important}
+ .status-timeline-time{grid-column:2!important;text-align:left!important;padding-top:1px!important;font-size:9px!important}
+ .status-timeline-marker{width:25px!important;height:25px!important}
+ .status-timeline-item:not(:last-child):before{left:12px!important;top:25px!important}
+}
 </style></head><body>
 <main class="status-main">
 <section class="status-brand" aria-label="Logo dan informasi waktu"><div class="status-logo"><img src="logo-copy-computer.PNG" alt="Logo Copy Computer" fetchpriority="high" decoding="async"></div><div class="status-info"><div class="status-date-time"><div class="status-date-chip"><span class="status-mini-icon">◷</span><div><small>WAKTU</small><strong id="statusTime">--:--:--</strong></div></div><div class="status-date-chip"><span class="status-mini-icon">▦</span><div><small>HARI & TANGGAL</small><strong id="statusDate">Memuat...</strong></div></div></div></div></section>
@@ -240,7 +267,7 @@ body{color:#fff!important}
 <form id="lookup"><label for="ticket">Nomor antrian servis</label><input id="ticket" required placeholder="Contoh: SRV-0001" autocomplete="off">
 <label for="pin">PIN pengecekan</label><input id="pin" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6 digit PIN" autocomplete="off">
 <button id="submit" type="submit">Cek Status</button></form><p id="message" class="msg" role="alert"></p>
-<section id="result" class="result hide"><div class="muted">Status perbaikan saat ini</div><div id="status" class="status"></div><div class="grid"><b>Nomor tiket</b><span id="r-ticket"></span><b>Tanggal masuk</b><span id="r-date"></span><b>Perangkat</b><span id="r-device"></span><b>Model</b><span id="r-model"></span><b>Teknisi</b><span id="r-tech"></span><b>Catatan</b><span id="r-note"></span></div><p class="muted" style="font-size:12px;margin-top:18px">Status diperbarui oleh teknisi Copy Computer. Silakan cek kembali halaman ini untuk melihat perkembangan terbaru.</p>
+<section id="result" class="result hide"><div class="muted">Status perbaikan saat ini</div><div id="status" class="status"></div><section id="statusTimeline" class="status-timeline" aria-live="polite"></section><div class="grid"><b>Nomor tiket</b><span id="r-ticket"></span><b>Tanggal masuk</b><span id="r-date"></span><b>Perangkat</b><span id="r-device"></span><b>Model</b><span id="r-model"></span><b>Teknisi</b><span id="r-tech"></span><b>Catatan</b><span id="r-note"></span></div><p class="muted" style="font-size:12px;margin-top:18px">Status diperbarui oleh teknisi Copy Computer. Silakan cek kembali halaman ini untuk melihat perkembangan terbaru.</p>
 <section id="customerChat" style="margin-top:22px;border-top:1px solid var(--line);padding-top:18px">
 <h2 style="font-size:18px;margin:0 0 5px;color:var(--navy)">Chat dengan teknisi</h2><p class="muted" style="font-size:12px;margin:0 0 12px">Kirim pesan jika ingin menanyakan perkembangan servis.</p>
 <div id="chatMessages" aria-live="polite" style="display:flex;flex-direction:column;gap:9px;max-height:340px;overflow:auto;padding:4px 0 10px"></div>
@@ -263,11 +290,44 @@ async function getActiveService(ticket,pin){
  if(legacy.error)throw legacy.error;const item=legacy.data&&legacy.data[0];
  return item&&item.status!=='Sudah diambil'?item:null;
 }
+function statusTimelineIcon(status){
+ const s=String(status||'').toLowerCase();
+ if(/diambil/.test(s))return '📦';
+ if(/selesai|siap/.test(s))return '✓';
+ if(/kerja|dikerjakan|perbaikan/.test(s))return '🔧';
+ if(/sparepart|suku cadang/.test(s))return '⚙';
+ if(/persetujuan|konfirmasi/.test(s))return '◷';
+ if(/periksa|pemeriksaan|menunggu/.test(s))return '⌕';
+ return '•';
+}
+function formatTimelineTime(value){
+ if(!value)return 'Waktu perubahan belum tercatat';
+ const d=new Date(value);if(Number.isNaN(d.getTime()))return 'Waktu perubahan belum tercatat';
+ return new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(d)+' WIB';
+}
+async function renderStatusTimeline(ticket,pin,currentStatus){
+ const box=$('statusTimeline');if(!box)return;
+ try{
+  const {data,error}=await sb.rpc('customer_read_service_timeline',{p_ticket:ticket,p_pin:pin});
+  if(error)throw error;
+  let rows=Array.isArray(data)?data.filter(x=>x&&x.status):[];
+  if(!rows.length)rows=[{status:currentStatus,at:null}];
+  if(rows[rows.length-1].status!==currentStatus)rows.push({status:currentStatus,at:null});
+  box.innerHTML='<div class="status-timeline-title"><span aria-hidden="true">↗</span>Riwayat perjalanan servis</div><div class="status-timeline-list">'+rows.map((item,index)=>{
+   const current=index===rows.length-1;
+   const note=current?'Status servis saat ini':(index===0?'Perangkat diterima / mulai diproses':'Status diperbarui oleh teknisi');
+   return '<div class="status-timeline-item'+(current?' is-current':'')+'"><span class="status-timeline-marker" aria-hidden="true">'+statusTimelineIcon(item.status)+'</span><div class="status-timeline-copy"><div class="status-timeline-name">'+safeText(item.status)+'</div><div class="status-timeline-note">'+note+'</div></div><time class="status-timeline-time">'+safeText(formatTimelineTime(item.at))+'</time></div>';
+  }).join('')+'</div>';
+ }catch(error){
+  box.innerHTML='<div class="status-timeline-title">Riwayat perjalanan servis</div><div class="status-timeline-note">Riwayat belum dapat dimuat. Status terbaru tetap ditampilkan di atas.</div>';
+  console.error('Riwayat status servis:',error);
+ }
+}
 async function loadCustomerChat(){
  if(!activeTicket||chatBusy)return;chatBusy=true;
  try{
   const check=await getActiveService(activeTicket,activePin);
-  if(!check){stopChat();$('result').classList.add('hide');$('message').textContent='Masa pengecekan telah berakhir karena servisan sudah diambil. Tiket tidak dapat digunakan lagi.';return}
+  if(!check){stopChat();$('result').classList.add('hide');$('message').textContent='Masa pengecekan telah berakhir karena servisan sudah diambil. Tiket tidak dapat digunakan lagi.';return}$('status').textContent=check.status||'Belum ada status';await renderStatusTimeline(activeTicket,activePin,check.status);
   const {data,error}=await sb.rpc('customer_read_service_chat',{p_ticket:activeTicket,p_pin:activePin});if(error)throw error;
   const box=$('chatMessages'),rows=data||[];
   box.innerHTML=rows.length?rows.map(m=>'<div style="max-width:88%;align-self:'+(m.sender_role==='customer'?'flex-end':'flex-start')+';background:'+(m.sender_role==='customer'?'#eaf2ff':'#f2f5fa')+';border:1px solid #dce7ff;border-radius:13px;padding:9px 12px"><b style="font-size:12px;color:#174a9c">'+safeText(m.sender_name)+'</b><div style="white-space:pre-wrap;overflow-wrap:anywhere;margin-top:3px">'+safeText(m.message)+'</div><small style="color:#718096;font-size:10px">'+safeText(new Date(m.created_at).toLocaleString('id-ID'))+'</small></div>').join(''):'<p class="muted" style="font-size:12px">Belum ada percakapan. Silakan kirim pesan jika membutuhkan bantuan.</p>';
