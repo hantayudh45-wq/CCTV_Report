@@ -22,6 +22,38 @@ button{background:var(--blue)!important;border-radius:14px!important;min-height:
 .status{background:#edf4ff!important;color:#1768e8!important}
 @media(max-width:600px){header{min-height:70px!important;margin:9px 10px!important;padding:7px 10px!important;border-radius:17px!important}header img{width:56px!important;max-height:43px!important;padding-right:9px!important}header b{font-size:16px!important}header small{font-size:11px!important}main{margin:22px auto!important;padding:0 12px!important}.card{padding:17px!important;border-radius:19px!important}h1{font-size:24px!important}.grid{grid-template-columns:110px 1fr!important}}
 
+
+/* Wallpaper seragam dengan welcome page dan menu aplikasi */
+html{min-height:100%;background:#071b45!important}
+body{
+  min-height:100vh!important;
+  min-height:100dvh!important;
+  position:relative!important;
+  isolation:isolate!important;
+  background:transparent!important;
+}
+body::before{
+  content:""!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:url("./assets/backgrounds/app-background.webp?v=133") center center/cover no-repeat!important;
+}
+header{
+  background:rgba(255,255,255,.91)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+}
+.card{
+  background:rgba(255,255,255,.94)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+}
+@media(max-width:600px){
+  body::before{background-position:center center!important;background-size:cover!important}
+}
+
 </style></head><body>
 <header><img src="logo-copy-computer.PNG" alt="Logo Copy Computer"><div><b>COPY COMPUTER</b><small>Layanan pengecekan status servis online</small></div></header>
 <main><section class="card"><h1>Cek Status Servisan</h1><p class="muted">Masukkan nomor tiket dan PIN yang diberikan saat perangkat diterima.</p>
