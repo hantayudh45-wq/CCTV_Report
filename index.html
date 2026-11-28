@@ -408,6 +408,13 @@ body>main{position:relative!important;z-index:1!important}
 }
 </style>
 
+<style id="welcome-logo-circle-refinement">
+/* White circle: 80% opacity, slightly lower behind the original logo */
+.login-view .welcome-brand .welcome-logo::before{top:8px!important;left:50%!important;transform:translateX(-50%)!important;width:116%!important;background:rgba(255,255,255,.80)!important}
+/* Add breathing room between the logo and the date/time tiles */
+.login-view .welcome-brand .welcome-logo{margin-bottom:32px!important}
+@media(max-width:680px){.login-view .welcome-brand .welcome-logo{margin-bottom:28px!important}}
+</style>
 </head>
 <body class="login-view">
 <main>
