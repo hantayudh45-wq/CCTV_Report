@@ -998,7 +998,7 @@ var SUPABASE_URL='https://ogolkyowgvypstjmxxde.supabase.co';
 var SUPABASE_PUBLISHABLE_KEY='sb_publishable_8NQAMLU4WhrHfn5nwf4gjQ_rr9egknn';
 var CCTV_LOGIN_EMAIL='cctv@copycomputer.app';
 var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-var currentUser=null,currentProfile=null,cloudReady=false,cloudTimer=null,realtimeChannel=null,cloudPending={},isReadOnly=false;
+var currentUser=null,currentProfile=null,cloudReady=false,cloudTimer=null,realtimeChannel=null,cloudPending={},cloudDeleted={},isReadOnly=false;
 var KEY='laporan-cctv-v2';
 
 // ==LOGIC==
@@ -1829,6 +1829,7 @@ document.addEventListener('click',function(e){
       if(!arm(b,'r:'+id,'Yakin hapus?'))break;
       (async function(){
         var target=db.reports.filter(function(x){return x.id===id})[0];
+        cloudDeleted[id]=true;
         try{
           if(cloudReady){
             var result=await sb.rpc('delete_report_if_version',{p_id:id,p_owner_id:target.ownerId||currentUser.id,p_expected_updated_at:target._cloudUpdatedAt});
@@ -1839,7 +1840,7 @@ document.addEventListener('click',function(e){
           if(!db.reports.length){db.reports.push(blankReport())}
           if(db.currentId===id)db.currentId=db.reports[0].id;
           save();renderHistory();
-        }catch(err){toast('Laporan tidak dihapus: '+(err.message||'periksa koneksi'));if(cloudReady)await refreshCloudHistory()}
+        }catch(err){delete cloudDeleted[id];toast('Laporan tidak dihapus: '+(err.message||'periksa koneksi'));if(cloudReady)await refreshCloudHistory()}
       })();break;
     }
     case 'bk-copy':{
@@ -1943,7 +1944,7 @@ async function refreshCloudHistory(){
     var remote=normReport(row.payload)||blankReport();remote.id=row.id;remote.ownerId=row.owner_id;remote.createdAt=+remote.createdAt||Date.parse(row.created_at)||(remote.date?new Date(remote.date+'T00:00:00').getTime():0)||Date.now();remote.updatedAt=+remote.updatedAt||Date.parse(row.updated_at)||Date.now();remote._cloudUpdatedAt=row.updated_at;
     var old=local.filter(function(x){return x.id===remote.id})[0];return old&&cloudPending[remote.id]?old:remote;
   });
-  local.forEach(function(old){if(!merged.some(function(x){return x.id===old.id})&&old.updatedAt>Date.now()-12000)merged.push(old)});
+  local.forEach(function(old){if(!cloudDeleted[old.id]&&!merged.some(function(x){return x.id===old.id})&&old.updatedAt>Date.now()-12000)merged.push(old)});
   db.reports=merged;if(!db.reports.length)db.reports=[blankReport()];
   if(!db.reports.some(function(x){return x.id===db.currentId}))db.currentId=db.reports[0].id;
   try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){}
