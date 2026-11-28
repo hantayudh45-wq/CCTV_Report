@@ -417,24 +417,18 @@ body>main{position:relative!important;z-index:1!important}
 @media(max-width:680px){.login-view .welcome-brand .welcome-logo{margin-bottom:28px!important}}
 
 <style id="app-menu-logo-match-welcome">
-/* Samakan efek logo di menu utama dengan logo pada halaman welcome/login. */
+/* Hilangkan cincin tegas pada logo menu; gunakan halo lebar yang menyatu seperti welcome page. */
+.app-menu-view .welcome-brand .welcome-logo{position:relative!important;isolation:isolate!important}
 .app-menu-view .welcome-brand .welcome-logo::before{
-  content:""!important;
-  position:absolute!important;
-  top:50%!important;
-  left:50%!important;
-  transform:translate(-50%,-50%)!important;
-  width:166%!important;
-  aspect-ratio:1!important;
-  border-radius:50%!important;
-  background:radial-gradient(circle,rgba(235,248,255,.68) 0%,rgba(215,240,255,.38) 34%,rgba(170,220,255,.14) 66%,rgba(120,195,255,.045) 84%,rgba(120,195,255,0) 100%)!important;
-  box-shadow:none!important;
-  filter:blur(12px)!important;
-  z-index:0!important;
+  content:""!important;display:block!important;position:absolute!important;
+  top:50%!important;left:50%!important;right:auto!important;bottom:auto!important;
+  transform:translate(-50%,-50%)!important;width:250%!important;height:auto!important;
+  aspect-ratio:1!important;border:0!important;border-radius:50%!important;
+  background:radial-gradient(ellipse at center,rgba(245,251,255,.34) 0%,rgba(220,242,255,.20) 30%,rgba(175,222,255,.09) 58%,rgba(130,198,255,.025) 78%,rgba(130,198,255,0) 100%)!important;
+  box-shadow:none!important;filter:blur(22px)!important;opacity:1!important;z-index:0!important;
 }
 .app-menu-view .welcome-brand .welcome-logo img{
-  position:relative!important;
-  z-index:1!important;
+  position:relative!important;z-index:1!important;
   filter:drop-shadow(0 0 4px rgba(225,246,255,.42))!important;
 }
 .app-menu-view .welcome-brand .welcome-logo{margin-bottom:32px!important}
