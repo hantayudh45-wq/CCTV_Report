@@ -409,8 +409,8 @@ body>main{position:relative!important;z-index:1!important}
 </style>
 
 <style id="welcome-logo-circle-refinement">
-/* Restore a restrained circular backing, then add contrast to the original logo */
-.login-view .welcome-brand .welcome-logo::before{top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;width:126%!important;aspect-ratio:1!important;border-radius:50%!important;background:radial-gradient(circle,rgba(224,244,255,.72) 0%,rgba(205,235,255,.48) 48%,rgba(170,220,255,.18) 70%,rgba(170,220,255,0) 82%)!important;box-shadow:none!important;filter:none!important}
+/* Keep a subtle white lift behind the logo while fading the outer halo seamlessly into the wallpaper */
+.login-view .welcome-brand .welcome-logo::before{top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;width:166%!important;aspect-ratio:1!important;border-radius:50%!important;background:radial-gradient(circle,rgba(235,248,255,.68) 0%,rgba(215,240,255,.38) 34%,rgba(170,220,255,.14) 66%,rgba(120,195,255,.045) 84%,rgba(120,195,255,0) 100%)!important;box-shadow:none!important;filter:blur(12px)!important}
 .login-view .welcome-brand .welcome-logo img{filter:drop-shadow(0 0 4px rgba(225,246,255,.42))!important}
 /* Add breathing room between the logo and the date/time tiles */
 .login-view .welcome-brand .welcome-logo{margin-bottom:32px!important}
